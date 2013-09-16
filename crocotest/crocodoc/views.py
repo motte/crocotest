@@ -94,4 +94,15 @@ class CrocoThumbnailDownload(View):
         response.write(image)
         return response
 
-
+class CrocoTextDownload(View):
+    def get(self, request, *args, **kwargs):
+        uuid = kwargs.pop('uuid', None)
+        if uuid is None:
+            raise Http404
+        
+        try:
+            text = crocodoc.download.text(uuid)
+        except crocodoc.CrocodocError as e:
+            return HttpResposne(content=e.response_content, status=e.status_code)
+    
+        return HttpResponse(content=text)
