@@ -43,4 +43,36 @@ class CrocoDocView(View):
                                 status=e.status_code)
         
         url = 'https://crocodoc.com/view/{0}'.format(session)
-    
+
+        if self.redirect:
+            return HttpResponseRedirect(url)
+        return HttpResponse(content=url)
+
+class CrocoDocumentDownload(View):
+    """
+    Downloads document from Crocodoc in PDF format
+    Does not download original version
+    """
+    def get(self, request, *args, **kwargs):
+        uuid = kwargs.pop('uuid', None)
+        if uuid is None:
+            raise Http404
+        
+        try:
+            qs_params = requrest.GET
+            pdf = True
+            annotated = filter_by = None
+            if 'annotated' in qs_params and qs_params['annotated'].lower() == 'true':
+                annotated = True
+            if 'filter' in qs_params:
+                filter_by = True
+            file = crocodoc.download.document(uuid, pdf=pdf, annotated=annotated, user_filter=filter_by)
+        except crocodoc.CrocodocError as e:
+            return HttpResponse(content=e.response_content, status=e.status_code)
+        
+        response = HttpResponse(mimetype='application/pdf')
+        response['Content-Disposition'] = 'attachment; filename=%s.pdf' % uuid
+        response.write(file)
+        return response
+
+
