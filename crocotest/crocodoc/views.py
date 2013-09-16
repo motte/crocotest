@@ -75,4 +75,23 @@ class CrocoDocumentDownload(View):
         response.write(file)
         return response
 
+class CrocoThumbnailDownload(View):
+    def get(self, request, *args, **kwargs):
+        uuid = kwargs.pop('uuid', None)
+        if uuid is None:
+            raise Http404
+
+        try:
+            width = height = 100
+            if 'size' in request.GET:
+                width, height = request.GET['size'].split('x')
+            image = crocodoc.download.thumbnail(uuid, width=int(width), height=int(height))
+        except crocodoc.CrocodocError as e:
+            return HttpResponse(content=e.response_content, status=e.status_code)
+        
+        response = HttpResponse(mimetype='image/png')
+        response['Content-Disposition'] = 'attachment; filename=%s.png' % uuid
+        response.write(image)
+        return response
+
 
