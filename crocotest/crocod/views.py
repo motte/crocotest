@@ -6,17 +6,26 @@ from crocodoc import CrocodocError
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import View
+from django.views.generic import TemplateView
+
 
 #from crocod.models import Exdocument
 
-def index(request):
+class IndexView(TemplateView):
+    template_name = 'index.html'
     
-    embedded_document = "https://crocodoc.com/view/cec35bc9-10db-4339-93e6-5961d7da6a21"
-    context = {'embedded_document': embedded_document}
-    return render(request, 'index.html', context)
-    #return HttpResponse("Index")
+#    session_id = curl "https://crocodoc.com/api/v2/session/create" --data "token=$STa6DuqR8pCJ9zV40ktFYdPv&uuid=cec35bc9-10db-4339-93e6-5961d7da6a21"
 
+    
 
+    def get_context_data(self, **kwargs):  
+ #       uuid = "cec35bc9-10db-4339-93e6-5961d7da6a21"
+        session_id = "cec35bc9-10db-4339-93e6-5961d7da6a21"
+        embeddeddocument = "https://crocodoc.com/view/%s" % session_id  
+        context = {'embeddeddocument': embeddeddocument}
+        return context
+    
+    
 
 class CrocoDocumentView(View):
     redirect = None
