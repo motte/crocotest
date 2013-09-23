@@ -1,13 +1,15 @@
 
+
 # local system - specific
 import crocodoc
 from crocodoc import CrocodocError
 
+
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.views.generic import View
 
-def index(request):
-    return HttpResponse("Index")
+class index(request):
+    return HttpResponse("Inde")
 
 
 
