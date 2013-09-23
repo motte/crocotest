@@ -2,7 +2,7 @@
 
 # local system - specific
 import crocodoc
-from crocodoc import CrocodocErorr
+from crocodoc import CrocodocError
 
 
 from django.http import Http404, HttpResponse, HttpResponseRedirect

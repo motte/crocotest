@@ -7,6 +7,8 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'crocotest.views.home', name='home'),
     # url(r'^crocotest/', include('crocotest.foo.urls')),
+
+    # the djcroco url
     url(r'', include('djcroco.urls')),
 
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

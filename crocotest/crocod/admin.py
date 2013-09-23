@@ -2,7 +2,7 @@
 # django admin
 from django.contrib import admin
 # the app
-from crocodoc.models import Example
+from crocod.models import Example
 
 class ExampleAdmin(admin.ModelAdmin):
     list_display = ['id',
