@@ -9,11 +9,10 @@ from crocod import views
 urlpatterns = patterns('',
     url(r'', include('djcroco.urls')),
 
+    # Simple index                
+    url(r'^$', 'crocod.views.index', name='index'),
+    # url(r'^crocotest/', include('crocotest.crocod.urls')),
 
-    url(r'^$', 'crocod.views.index', name='home'),
-   # url(r'^crocotest/', include('crocotest.crocod.urls')),
-
-    url(r'', include('djcroco.urls')),
 
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 

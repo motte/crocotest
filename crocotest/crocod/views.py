@@ -4,10 +4,12 @@ import crocodoc
 from crocodoc import CrocodocError
 
 from django.http import Http404, HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import View
 
 def index(request):
-    return HttpResponse("Index")
+     return render(request, 'index.html')
+    #return HttpResponse("Index")
 
 
 
