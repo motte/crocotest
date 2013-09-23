@@ -14,3 +14,9 @@ class Example(models.Model):
     def __unicode__(self):
         return self.name
     
+class NullableExample(models.Model):
+    name = models.CharField(max_length=255)
+    document = CrocoField(null=True)
+    
+    def __unicode__(self):
+        return self.name

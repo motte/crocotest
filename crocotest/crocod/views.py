@@ -8,7 +8,7 @@ from crocodoc import CrocodocError
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.views.generic import View
 
-class CrocoDocView(View):
+class CrocoDocumentView(View):
     redirect = None
 
     def get(self, request, *args, **kwargs):
@@ -59,7 +59,7 @@ class CrocoDocumentDownload(View):
             raise Http404
         
         try:
-            qs_params = requrest.GET
+            qs_params = request.GET
             pdf = True
             annotated = filter_by = None
             if 'annotated' in qs_params and qs_params['annotated'].lower() == 'true':

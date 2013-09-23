@@ -55,6 +55,9 @@
     <div class="container">
 
       <h1>{% templatetag openblock %} block page_title {% templatetag closeblock %}Example Base Template{% templatetag openblock %} endblock page_title {% templatetag closeblock %}</h1>
+      
+      {{ obj.document.name }}
+      {{ obj.document.thumbnail }}
 
       {% templatetag openblock %} block content {% templatetag closeblock %}
         <p>Use this document as a way to quick start any new project.</p>
