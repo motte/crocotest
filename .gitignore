@@ -6,6 +6,7 @@
 *.py~
 local_settings.py
 settings.py
+*.py#
 
 
 *.py[cod]
